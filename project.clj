@@ -1,6 +1,6 @@
 (defproject clj-btc-e-api "0.1.0-SNAPSHOT"
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
+  :description "Clojure library for btc-e.com api"
+  :url "https://github.com/Raffinate/clj-btc-e-api"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.7.0"]
