@@ -24,6 +24,13 @@
   [shft]
   #(mod (bit-shift-right (System/currentTimeMillis) shft) 4294967295))
 
+(defn atom-nonce
+  "val - initial value of nonce"
+  [val]
+  (let [n (atom val)]
+    (fn []
+      (swap! n inc))))
+
 (defn new-api
   ([]
    (new-api nil nil nil))
