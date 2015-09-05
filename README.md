@@ -19,23 +19,45 @@ with your key and secret to use trade api.
 
 ```clojure                        
 user> @(btce/get-ticker :btc-usd)
-{:ticker {:vol_cur 4091.90718, :updated 1441444674, :high 226.845, :sell 225.368, :buy 225.504, :low 224, :avg 225.4225, :last 225.504, :server_time 1441444675, :vol 923877.0129}}
+{:ticker
+    {:vol_cur 4091.90718,
+     :updated 1441444674,
+     :high 226.845,
+     :sell 225.368,
+     :buy 225.504,
+     :low 224,
+     :avg 225.4225,
+     :last 225.504,
+     :server_time 1441444675,
+     :vol 923877.0129}}
 
 user> (def s (btce/new-stock "MY-KEY-BLAH-BLAH" "MY-SECRET-BLAH-BLAH"))
 user> @(btce/trade s :getInfo)
-{:success 1, :return {:funds {:ppc 132, :btc 123, :cnh 123, :ftc 321, :xpm 231, :usd 1232, :nvc 3213, :ltc 3123, :rur 33211, :nmc 321, :gbp 231, :trc 131, :eur 123}, :rights {:info 1, :trade 0, :withdraw 0}, :transaction_count 31, :open_orders 12, :server_time 1441445408}}
+{:success 1,
+ :return
+ {:funds
+  {:ppc 132,
+   ...
+   :eur 123},
+  :rights
+  {:info 1,
+   :trade 0,
+   :withdraw 0},
+  :transaction_count 31,
+  :open_orders 12,
+  :server_time 1441445408}}
 user> @(btce/trade s :TradeHistory :from-id 343140 :end-id 343150 :pair :btc-usd)
 {
-	"success":1,
-	"return":{
-		"166830":{
-			"pair":"btc_usd",
-			"type":"sell",
-			"amount":1,
-			"rate":450,
-			"order_id":343148,
-			"is_your_order":1,
-			"timestamp":1342445793
+	:success 1,
+	:return {
+		:166830
+            {:pair "btc_usd",
+			 :type "sell",
+			 :amount 1,
+			 :rate 450,
+			 :order_id 343148,
+			 :is_your_order 1,
+			 :timestamp 1342445793
 		}
 	}
 }
@@ -44,8 +66,9 @@ user> @(btce/trade s :TradeHistory :from-id 343140 :end-id 343150 :pair :btc-usd
 
 Trade api requires an incremental number each request. 
 Default nonce generator use system time to generate nonce, but this
-can cause errors on high frequency requests and it looses possible numbers even if you don't trade. 
-You can use atom generator or any 0-arity function.
+can cause errors on high frequency requests and
+it looses possible numbers even if you don't trade.
+You can use atom generator or any 0-arity function instead.
 
 ```clojure
 user> (def start-number 1)
