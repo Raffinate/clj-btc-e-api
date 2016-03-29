@@ -130,7 +130,7 @@
      ~(str "Request " (name rtype) " with public API." \newline
            "Argument trade-pair can be string, symbol or keyword (ex. :btc-usd)." \newline
            "Dashes in keywords and symbold will be converted to underscores." \newline
-           "Returns a future with json response already converted to map with"
+           "Returns a future with json response already converted to map with "
            "keywords as keys.")
      ~'[trade-pair]
      (get-public *default-stock* ~'trade-pair ~rtype)))
